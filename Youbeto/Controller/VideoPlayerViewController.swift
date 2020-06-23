@@ -11,7 +11,7 @@ import UIKit
 class VideoPlayerViewController: UIViewController {
 
 	let videoPlayerHeight = Helper.keyWindow!.frame.width * 9 / 16 + 44
-	lazy var videoPlayerView = VideoPlayerView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: videoPlayerHeight))
+	lazy var videoPlayerView = VideoPlayerView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: videoPlayerHeight), andLink: "????")
 	lazy var tableView = UITableView(frame: CGRect(x: 0, y: self.videoPlayerView.frame.maxY, width: view.frame.width, height: view.frame.height - self.videoPlayerView.frame.height), style: .plain)
 
     override func viewDidLoad() {

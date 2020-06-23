@@ -197,7 +197,7 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
 
 extension HomeController: VideoCellDidTappedProtocol {
 	
-	func videCellDidTapped(onVideo video: Video) {
+	func videoCellDidTapped(onVideo video: Video) {
 		let presentVC = VideoPlayerViewController()
 		presentVC.modalPresentationStyle = .fullScreen
 		self.present(presentVC, animated: false, completion: nil)

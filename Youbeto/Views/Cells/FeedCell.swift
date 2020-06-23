@@ -9,7 +9,7 @@
 import UIKit
 
 protocol VideoCellDidTappedProtocol: class {
-	func videCellDidTapped(onVideo video: Video)
+	func videoCellDidTapped(onVideo video: Video)
 }
 
 
@@ -85,11 +85,12 @@ extension FeedCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
 	{
-		guard let chosenVideo = videos?[indexPath.row] else { return }
-		openVideoDelegate?.videCellDidTapped(onVideo: chosenVideo)
-//		let videoLauncher = VideoLauncher()
+//		guard let chosenVideo = videos?[indexPath.row] else { return }
+//		openVideoDelegate?.videCellDidTapped(onVideo: chosenVideo)
+		let videoLauncher = VideoLauncher()
+		videoLauncher.showVideoPlayer(withLink: "https://pvv4.vkuservideo.net/c512236/21/ef9MTI0MT86OTs9/videos/032a1234d1.720.mp4")
 //		delegate?.hideStatusBar()
-//		videoLauncher.showVideoPlayer()
+		
 		
 	}
 	

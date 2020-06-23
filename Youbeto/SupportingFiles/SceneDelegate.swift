@@ -15,34 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		guard let myScene = (scene as? UIWindowScene) else { return }
 		
-		window = UIWindow(frame: myScene.coordinateSpace.bounds)
+		window = MainNavigator.shared.window
 		window?.windowScene = myScene
-		let flowLayout = UICollectionViewFlowLayout()
-		let homeVC = HomeController(collectionViewLayout: flowLayout)
-		let navigationController = CustomNavigationViewController(rootViewController: homeVC)
-		
-		navigationController.navigationBar.tintColor = .white
-		navigationController.navigationBar.shadowImage = UIImage()
-		navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		navigationController.navigationBar.setBackgroundImage(UIImage(), for: .compact)
-		navigationController.navigationBar.setBackgroundImage(UIImage(), for: .compactPrompt)
-		navigationController.navigationBar.setBackgroundImage(UIImage(), for: .defaultPrompt)
-		navigationController.navigationBar.isTranslucent = false
-		navigationController.navigationBar.barTintColor = #colorLiteral(red: 0.9019607843, green: 0.1215686275, blue: 0.1215686275, alpha: 1)
-		window?.rootViewController = navigationController
-		window?.makeKeyAndVisible()
-	
-		guard let statusBarViewHeight = myScene.statusBarManager?.statusBarFrame.height, window != nil else { return }
-		let statusBarBackgroundView = UIView()
-		statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-		statusBarBackgroundView.backgroundColor = #colorLiteral(red: 0.7607843137, green: 0.1215686275, blue: 0.1215686275, alpha: 1)
-		window?.addSubview(statusBarBackgroundView)
-		NSLayoutConstraint.activate([
-			statusBarBackgroundView.topAnchor.constraint(equalTo: window!.topAnchor),
-			statusBarBackgroundView.heightAnchor.constraint(equalToConstant: statusBarViewHeight),
-			statusBarBackgroundView.leadingAnchor.constraint(equalTo: window!.leadingAnchor),
-			statusBarBackgroundView.trailingAnchor.constraint(equalTo: window!.trailingAnchor)
-		])
+		MainNavigator.shared.configurateStatusBarView(with: myScene)
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {

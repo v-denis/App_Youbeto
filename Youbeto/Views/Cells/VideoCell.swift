@@ -24,7 +24,6 @@ class VideoCell: BaseCell {
 		}
 	}
 	
-	let imageCache = NSCache<NSString, UIImage>()
 	var estimatedRect: CGRect?
 	
 	let separatorView: UIView = {
@@ -140,28 +139,3 @@ class VideoCell: BaseCell {
 	
 }
 
-
-
-//	private func fetchThumbnailImage() {
-//		if let thumbnailImageStringUrl = video?.thumbnailImageName {
-//			DispatchQueue.global(qos: .userInteractive).async {
-//				let thumbnailImage = self.fetchImage(from: thumbnailImageStringUrl)
-//				guard thumbnailImage != nil else { return }
-//				DispatchQueue.main.async {
-//					self.thumbnailImageView.image = thumbnailImage
-//				}
-//			}
-//		}
-//	}
-//
-//	private func fetchProfileImage() {
-//		if let profileImageStringUrl = video?.channel?.profileImageName {
-//			DispatchQueue.global(qos: .userInteractive).async {
-//				let profileImage = self.fetchImage(from: profileImageStringUrl)
-//				guard profileImage != nil else { return }
-//				DispatchQueue.main.async {
-//					self.profileImageView.image = profileImage
-//				}
-//			}
-//		}
-//	}
