@@ -23,4 +23,13 @@ class BaseCell: UICollectionViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	var cellWidth: CGFloat? {
+		didSet {
+			if let newCellWidth = cellWidth {
+				contentView.widthAnchor.constraint(equalToConstant: newCellWidth).isActive = true
+			}
+			
+		}
+	}
+	
 }

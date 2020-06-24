@@ -39,13 +39,35 @@ class Video: NSObject, Decodable {
 
 class Channel: NSObject, Decodable {
 	
-	var name: String?
-	var profileImageName: String?
-	
 	enum CodingKeys: String, CodingKey {
 		case name
 		case channelProfileImageURL = "profile_image_name"
 	}
+	
+	var name: String?
+	var profileImageName: String?
+	var numberOfSubscribers: Int?
+	
+	var subscribersText: String {
+		if var subscribers = numberOfSubscribers {
+			var counter = 0
+			var divider = 1
+			var lastPost = ""
+			let postFix = [3:"K",6:"M",9:"B",12:"T"]
+			while subscribers > 0 {
+				counter += 1
+				subscribers /= 10
+				if postFix[counter] != nil {
+					lastPost = postFix[counter]!
+					divider = Int(pow(10, Double(counter)))
+				}
+				
+			}
+			return "\((Double(numberOfSubscribers!)/Double(divider)))\(lastPost) subscribers"
+		}
+		return "No subscribers"
+	}
+
 	
 	
 	required init(from decoder: Decoder) throws {
@@ -53,6 +75,12 @@ class Channel: NSObject, Decodable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		self.name = try? container.decode(String.self, forKey: .name)
 		self.profileImageName = try? container.decode(String.self, forKey: .channelProfileImageURL)
+	}
+	
+	init(name: String, profileImageName: String, subscribers: Int) {
+		self.name = name
+		self.profileImageName = profileImageName
+		self.numberOfSubscribers = subscribers
 	}
 	
 	

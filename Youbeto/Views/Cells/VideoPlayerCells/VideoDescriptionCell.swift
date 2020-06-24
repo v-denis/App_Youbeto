@@ -10,11 +10,13 @@ import UIKit
 
 class VideoDescriptionCell: BaseCell {
 	
+	static let reuseId = String(describing: VideoDescriptionCell.self)
 	let titleLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.numberOfLines = 2
-		label.font = UIFont.preferredFont(forTextStyle: .body)
+		label.text = "Taylor Swift - I Knew You Were Trouble (Exclusive)"
+		label.font = UIFont.preferredFont(forTextStyle: .title3)
 		label.textColor = .black
 		return label
 	}()
@@ -22,12 +24,13 @@ class VideoDescriptionCell: BaseCell {
 	let subtitleLabel: UILabel = {
 		let label = UILabel()
 		label.numberOfLines = 2
+		label.text = "101M views • 2 months ago"
 		label.font = UIFont.preferredFont(forTextStyle: .footnote)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textColor = .darkGray
 		return label
 	}()
-	let thumbsUpView = ButtonWithLabelView(frame: .zero, labelText: "1,3 mln", buttonImageName: "hand.thumbsup.fill")
+	let thumbsUpView = ButtonWithLabelView(frame: .zero, labelText: "1,3M", buttonImageName: "hand.thumbsup.fill")
 	let thumbsDownView = ButtonWithLabelView(frame: .zero, labelText: "354", buttonImageName: "hand.thumbsdown.fill")
 	let shareView = ButtonWithLabelView(frame: .zero, labelText: "Share", buttonImageName: "arrowshape.turn.up.right.fill")
 	let downloadView = ButtonWithLabelView(frame: .zero, labelText: "Download", buttonImageName: "arrow.down.circle.fill")
@@ -39,14 +42,14 @@ class VideoDescriptionCell: BaseCell {
 		return view
 	}()
 	
-	var cellWidth: CGFloat? {
-		didSet {
-			if let newCellWidth = cellWidth {
-				contentView.widthAnchor.constraint(equalToConstant: newCellWidth).isActive = true
-			}
-			
-		}
-	}
+//	var cellWidth: CGFloat? {
+//		didSet {
+//			if let newCellWidth = cellWidth {
+//				contentView.widthAnchor.constraint(equalToConstant: newCellWidth).isActive = true
+//			}
+//			
+//		}
+//	}
 	
 	override func setupLayout() {
 		backgroundColor = .white

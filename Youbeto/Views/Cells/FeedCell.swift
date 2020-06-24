@@ -61,6 +61,9 @@ class FeedCell: BaseCell {
 //MARK: collection view delegate and data source methods
 extension FeedCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return videos?.count ?? 0
@@ -88,7 +91,7 @@ extension FeedCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //		guard let chosenVideo = videos?[indexPath.row] else { return }
 //		openVideoDelegate?.videCellDidTapped(onVideo: chosenVideo)
 		let videoLauncher = VideoLauncher()
-		videoLauncher.showVideoPlayer(withLink: "https://pvv4.vkuservideo.net/c512236/21/ef9MTI0MT86OTs9/videos/032a1234d1.720.mp4")
+		videoLauncher.showVideoPlayer(withLink: "https://pvv4.vkuservideo.net/c505323/ecbOTUwNzI2MDU/videos/4cdd6ef2ca.720.mp4")
 //		delegate?.hideStatusBar()
 		
 		
