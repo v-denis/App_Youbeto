@@ -36,6 +36,7 @@ class RecommendedVideoHeaderView: UICollectionReusableView {
 	}()
 	
 	func configure() {
+		backgroundColor = .white
 		Helper.addViewsTo(superView: self, views: [upNextLabel, autoplayLabel, autoplaySwitch])
 		
 		NSLayoutConstraint.activate([
@@ -56,8 +57,6 @@ class RecommendedVideoHeaderView: UICollectionReusableView {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		backgroundColor = .white
-		print(upNextLabel.frame)
 	}
 	
 }

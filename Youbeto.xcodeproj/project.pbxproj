@@ -35,7 +35,7 @@
 		EB76CDFB2479D29C00DF3E4A /* youtubeJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = EB76CDFA2479D29C00DF3E4A /* youtubeJSON.json */; };
 		EBA55E05247EC7EF00348003 /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA55E04247EC7EF00348003 /* VideoLauncher.swift */; };
 		EBA55E07247EDA6000348003 /* CustomNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA55E06247EDA6000348003 /* CustomNavigationViewController.swift */; };
-		EBA55E0A247EE27C00348003 /* ChangeStatusBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA55E09247EE27C00348003 /* ChangeStatusBarProtocol.swift */; };
+		EBA55E0A247EE27C00348003 /* ConfigureStatusBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA55E09247EE27C00348003 /* ConfigureStatusBarProtocol.swift */; };
 		EBB1C54F2475DC780037C4DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1C54E2475DC780037C4DF /* AppDelegate.swift */; };
 		EBB1C5512475DC780037C4DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1C5502475DC780037C4DF /* SceneDelegate.swift */; };
 		EBB1C5532475DC780037C4DF /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1C5522475DC780037C4DF /* HomeController.swift */; };
@@ -76,7 +76,7 @@
 		EB76CDFA2479D29C00DF3E4A /* youtubeJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = youtubeJSON.json; sourceTree = "<group>"; };
 		EBA55E04247EC7EF00348003 /* VideoLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
 		EBA55E06247EDA6000348003 /* CustomNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewController.swift; sourceTree = "<group>"; };
-		EBA55E09247EE27C00348003 /* ChangeStatusBarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeStatusBarProtocol.swift; sourceTree = "<group>"; };
+		EBA55E09247EE27C00348003 /* ConfigureStatusBarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureStatusBarProtocol.swift; sourceTree = "<group>"; };
 		EBB1C54B2475DC780037C4DF /* Youbeto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Youbeto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB1C54E2475DC780037C4DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBB1C5502475DC780037C4DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 		EBA55E08247EE26000348003 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				EBA55E09247EE27C00348003 /* ChangeStatusBarProtocol.swift */,
+				EBA55E09247EE27C00348003 /* ConfigureStatusBarProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -322,7 +322,7 @@
 				EB56C52324A252EC00AA3659 /* CommentsCell.swift in Sources */,
 				EBDF322724A3BC70004970EA /* VideoPlayerBaseCell.swift in Sources */,
 				EB2E7CE92478743D009B2B4D /* MenuBar.swift in Sources */,
-				EBA55E0A247EE27C00348003 /* ChangeStatusBarProtocol.swift in Sources */,
+				EBA55E0A247EE27C00348003 /* ConfigureStatusBarProtocol.swift in Sources */,
 				EB56C51B24A111A700AA3659 /* VideoDescriptionCell.swift in Sources */,
 				EB212FCA247C4057003E4ACA /* SettingsCell.swift in Sources */,
 				EB2E7CE4247852B8009B2B4D /* VideoCell.swift in Sources */,

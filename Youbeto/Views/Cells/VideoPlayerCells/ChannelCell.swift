@@ -106,7 +106,7 @@ class ChannelCell: VideoPlayerBaseCell {
 			separatorView.heightAnchor.constraint(equalToConstant: 1)
 		])
 		
-		channel = Channel(name: "Taylor Swift global Taylor Swift global Taylor Swift global Taylor Swift global",
+		channel = Channel(name: "Taylor Swift global",
 						  profileImageName: "taylor_swift_profile_0",
 						  subscribers: 1_400_000)
 		

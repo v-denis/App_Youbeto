@@ -15,7 +15,7 @@ protocol VideoCellDidTappedProtocol: class {
 
 class FeedCell: BaseCell {
 	
-	var delegate: ChangeStatusBarProtocol?
+	var delegate: ConfigureStatusBarProtocol?
 	weak var openVideoDelegate: VideoCellDidTappedProtocol?
 	var videos: [Video]?
 	let videoCellId = "VideoCellId"
@@ -88,14 +88,22 @@ extension FeedCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
 	{
-//		guard let chosenVideo = videos?[indexPath.row] else { return }
-//		openVideoDelegate?.videCellDidTapped(onVideo: chosenVideo)
 		let videoLauncher = VideoLauncher()
+		videoLauncher.showBarDelegate = self
 		videoLauncher.showVideoPlayer(withLink: "https://pvv4.vkuservideo.net/c505323/ecbOTUwNzI2MDU/videos/4cdd6ef2ca.720.mp4")
-//		delegate?.hideStatusBar()
-		
+		if !Helper.hasTopNotch {
+			delegate?.hideStatusBar()
+		}
 		
 	}
 	
+	
+}
+
+//MARK: - ShowStatusBarProtocol
+extension FeedCell: ShowStatusBarProtocol {
+	func showStatusBar() {
+		delegate?.showStatusBar()
+	}
 	
 }

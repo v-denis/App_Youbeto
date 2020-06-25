@@ -46,7 +46,7 @@ class VideoPlayerView: UIView {
 	}()
 	let controlsContainerView: UIView = {
 		let view = UIView()
-		view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+		view.backgroundColor = .clear
 		return view
 	}()
 	let videoLengthLabel: UILabel = {
@@ -84,6 +84,7 @@ class VideoPlayerView: UIView {
 	init(frame: CGRect, andLink link: String) {
 		super.init(frame: frame)
 		
+		setupDarkLayer()
 		addPlayerToSublayer(andCheck: link)
 		controlElementsSetupLayout()
 		configuratingTapGesture()
@@ -125,7 +126,11 @@ extension VideoPlayerView
 			player = AVPlayer(url: videoUrl)
 			let playerLayer = AVPlayerLayer(player: player)
 			self.layer.addSublayer(playerLayer)
-			playerLayer.frame = CGRect(x: 0, y: 44, width: frame.width, height: frame.height - 44)
+			var topShift: CGFloat = 0
+			if Helper.hasTopNotch {
+				topShift = MainNavigator.shared.window.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+			}
+			playerLayer.frame = CGRect(x: 0, y: topShift, width: frame.width, height: frame.height - topShift)
 			startPlayingVideo()
 		} else {
 			print("startPlayingVideo error: Incorrent link")
@@ -157,7 +162,7 @@ extension VideoPlayerView
 		if keyPath == "currentItem.loadedTimeRanges" {
 			activityIndicatorView.stopAnimating()
 			videoTimerSlider.isEnabled = true
-			controlsContainerView.backgroundColor = .clear
+//			controlsContainerView.isHidden = false
 			pausePlayButton.isHidden = false
 			isPlaying = true
 			setupTimerToHidePlayPauseButton(withInterval: 3.0)
@@ -182,7 +187,6 @@ extension VideoPlayerView {
 		controlsContainerView.frame = frame
 		addSubview(controlsContainerView)
 		Helper.addViewsTo(superView: controlsContainerView, views: [activityIndicatorView, pausePlayButton, videoLengthLabel, videoTimerSlider, currentTimeLabel, closeVideoPlayerButton])
-		
 		
 		NSLayoutConstraint.activate([
 			activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -220,7 +224,14 @@ extension VideoPlayerView {
 			currentTimeLabel.heightAnchor.constraint(equalToConstant: 24),
 			currentTimeLabel.widthAnchor.constraint(equalToConstant: 50)
 		])
-		
+	}
+	
+	private func setupDarkLayer() {
+		let darkLayer = CALayer()
+		darkLayer.frame = bounds
+		let darkColor = UIColor.black.withAlphaComponent(0.25)
+		darkLayer.backgroundColor = darkColor.cgColor
+		controlsContainerView.layer.addSublayer(darkLayer)
 	}
 	
 }
@@ -230,20 +241,21 @@ extension VideoPlayerView {
 	
 	private func configuratingTapGesture() {
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
-		controlsContainerView.addGestureRecognizer(tapGesture)
+		self.addGestureRecognizer(tapGesture)
 	}
 	
 	@objc private func handleTapGesture(_ sender: UITapGestureRecognizer)
 	{
-		if pausePlayButton.isHidden {
-			pausePlayButton.alpha = 0.0
-			pausePlayButton.isHidden = false
+		if controlsContainerView.isHidden {
+			controlsContainerView.alpha = 0.0
+			controlsContainerView.isHidden = false
 			UIView.animate(withDuration: 0.3, animations: { [weak self] in
-				self?.pausePlayButton.alpha = 1.0
+				self?.controlsContainerView.alpha = 1.0
 			}) { (_) in
-				self.setupTimerToHidePlayPauseButton(withInterval: 3.0)
+				self.setupTimerToHidePlayPauseButton(withInterval: 4.0)
 			}
 		} else {
+			controlsContainerView.alpha = 0.0
 			setupTimerToHidePlayPauseButton(withInterval: 0.0)
 		}
 	}
@@ -258,11 +270,11 @@ extension VideoPlayerView
 		timerForButtonHide?.invalidate()
 		timerForButtonHide = Timer.scheduledTimer(withTimeInterval: interval, repeats: false, block: {[weak self] (timer) in
 			guard let strongSelf = self else { return }
-			strongSelf.pausePlayButton.alpha = 1.0
+			strongSelf.controlsContainerView.alpha = 1.0
 			UIView.animate(withDuration: 0.3, animations: {
-				strongSelf.pausePlayButton.alpha = 0.0
+				strongSelf.controlsContainerView.alpha = 0.0
 			}) { (_) in
-				strongSelf.pausePlayButton.isHidden = true
+				strongSelf.controlsContainerView.isHidden = true
 			}
 		})
 		RunLoop.current.add(timerForButtonHide!, forMode: .common)
@@ -276,8 +288,8 @@ extension VideoPlayerView
 			let seekTime = CMTime(seconds: slideredTime, preferredTimescale: videoDuration.timescale)
 			player.pause()
 			player.seek(to: seekTime)
-			pausePlayButton.isHidden = false
-			pausePlayButton.alpha = 1.0
+			controlsContainerView.isHidden = false
+			controlsContainerView.alpha = 1.0
 			if isPlaying {
 				player.play()
 				setupTimerToHidePlayPauseButton(withInterval: 1.5)
@@ -301,7 +313,7 @@ extension VideoPlayerView
 		} else {
 			player.play()
 			pausePlayButton.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
-			setupTimerToHidePlayPauseButton(withInterval: 1.5)
+			setupTimerToHidePlayPauseButton(withInterval: 3.0)
 		}
 		isPlaying.toggle()
 		

@@ -9,8 +9,12 @@
 import Foundation
 
 
-protocol ChangeStatusBarProtocol: class {
-	
+public protocol HideStatusBarProtocol: class {
 	func hideStatusBar()
+}
+
+public protocol ShowStatusBarProtocol: class {
 	func showStatusBar()
 }
+
+public typealias ConfigureStatusBarProtocol = ShowStatusBarProtocol & HideStatusBarProtocol

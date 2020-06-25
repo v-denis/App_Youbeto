@@ -10,6 +10,10 @@ import UIKit
 
 class Helper {
 	
+	static var hasTopNotch: Bool {
+		return (Helper.keyWindow?.safeAreaInsets.bottom ?? 0) > 0
+	}
+	
 	static let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first
 	
 	static func tamicOff(for views: [UIView]) {

@@ -20,7 +20,11 @@ class HomeController: BasicFlowController<HomeNavigator> {
 	
 	
 	let redView = UIView()
-	var isStatusBarHidden = false
+	var isStatusBarHidden = false {
+		didSet {
+			setNeedsStatusBarAppearanceUpdate()
+		}
+	}
 	var titleViewLabel = UILabel()
 	var currentScreen: ScreenName {
 		switch menuBar.selectedIndexPath.item {
@@ -207,7 +211,7 @@ extension HomeController: VideoCellDidTappedProtocol {
 
 
 
-extension HomeController: ChangeStatusBarProtocol {
+extension HomeController: ConfigureStatusBarProtocol {
 	
 	func hideStatusBar() {
 		isStatusBarHidden = true

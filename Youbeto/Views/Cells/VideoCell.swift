@@ -130,9 +130,8 @@ class VideoCell: BaseCell {
 	private func setTitlesText() {
 		if let title = video?.title { titleLabel.text = title }
 		numberFormatter.numberStyle = .decimal
-		if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfView,
-			let stringNumber = numberFormatter.string(from: NSNumber(value: numberOfViews)) {
-			subtitleTextView.text = "\(channelName) • \(stringNumber) • 2 years ago"
+		if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViewsText {
+			subtitleTextView.text = "\(channelName) • \(numberOfViews) views • 2 years ago"
 		}
 		//measure title lable text size
 		if let title = video?.title {

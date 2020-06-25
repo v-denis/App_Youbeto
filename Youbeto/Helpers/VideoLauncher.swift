@@ -12,8 +12,13 @@ import AVFoundation
 class VideoLauncher: NSObject {
 
 	let keyWindow = MainNavigator.shared.window
+	weak var showBarDelegate: ShowStatusBarProtocol?
 	var videoPlayerHeight: CGFloat {
-		return keyWindow.frame.width * 9 / 16 + 44
+		var topShift: CGFloat = 0
+		if Helper.hasTopNotch {
+			topShift = MainNavigator.shared.window.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+		}
+		return keyWindow.frame.width * 9 / 16 + topShift
 	}
 	var bottomViewHeight: CGFloat {
 		return keyWindow.frame.height - videoPlayerHeight
@@ -67,6 +72,7 @@ class VideoLauncher: NSObject {
 extension VideoLauncher: CloseVideoPlayerProtocol {
 	
 	func closeVideoPlayer() {
+		showBarDelegate?.showStatusBar()
 		if mainView != nil {
 			mainView?.subviews.forEach({ $0.removeFromSuperview() })
 			mainView!.removeFromSuperview()
