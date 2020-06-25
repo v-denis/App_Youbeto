@@ -17,6 +17,10 @@ class Video: NSObject, Decodable {
 	var numberOfView: Int?
 	var dateToPublish: Date?
 	
+	var numberOfViewsText: String {
+		return numberOfView?.getStringWithPostfix() ?? "no views"
+	}
+	
 	enum CodingKeys: String, CodingKey {
 		case title
 		case thumbnailImageURL = "thumbnail_image_name"
@@ -49,23 +53,7 @@ class Channel: NSObject, Decodable {
 	var numberOfSubscribers: Int?
 	
 	var subscribersText: String {
-		if var subscribers = numberOfSubscribers {
-			var counter = 0
-			var divider = 1
-			var lastPost = ""
-			let postFix = [3:"K",6:"M",9:"B",12:"T"]
-			while subscribers > 0 {
-				counter += 1
-				subscribers /= 10
-				if postFix[counter] != nil {
-					lastPost = postFix[counter]!
-					divider = Int(pow(10, Double(counter)))
-				}
-				
-			}
-			return "\((Double(numberOfSubscribers!)/Double(divider)))\(lastPost) subscribers"
-		}
-		return "No subscribers"
+		return "\(numberOfSubscribers?.getStringWithPostfix() ?? "no") subscribers"
 	}
 
 	

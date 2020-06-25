@@ -8,9 +8,8 @@
 
 import UIKit
 
-class ChannelCell: BaseCell {
+class ChannelCell: VideoPlayerBaseCell {
 	
-	static let reuseId = String(describing: ChannelCell.self)
 	var channel: Channel? {
 		didSet {
 			if channel != nil {
@@ -37,8 +36,8 @@ class ChannelCell: BaseCell {
 	let titleLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.numberOfLines = 1
-		label.font = .preferredFont(forTextStyle: .title3)
+		label.numberOfLines = 2
+		label.font = .preferredFont(forTextStyle: .body)
 		return label
 	}()
 	
@@ -60,16 +59,6 @@ class ChannelCell: BaseCell {
 		return button
 	}()
 	
-//	let subscribeButton: UILabel = {
-//		let label = UILabel()
-//		label.textColor = .systemRed
-//		label.text = "SUBSCRIBE"
-//		label.textAlignment = .right
-//		label.font = .preferredFont(forTextStyle: .headline)
-//		label.numberOfLines = 1
-//		label.translatesAutoresizingMaskIntoConstraints = false
-//		return label
-//	}()
 	let separatorView: UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -78,43 +67,37 @@ class ChannelCell: BaseCell {
 	}()
 	
 	override func setupLayout() {
+		super.setupLayout()
 		
 		Helper.addViewsTo(superView: self, views: [channelImageView, titleLabel, subtitleLabel, subscribeButton, separatorView])
-		contentView.translatesAutoresizingMaskIntoConstraints = false
-		
-		NSLayoutConstraint.activate([
-			contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-			contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			contentView.topAnchor.constraint(equalTo: topAnchor),
-			contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
-		])
 		
 		NSLayoutConstraint.activate([
 			channelImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-			channelImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
 			channelImageView.heightAnchor.constraint(equalToConstant: 44),
 			channelImageView.widthAnchor.constraint(equalToConstant: 44),
-			channelImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-			channelImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-			channelImageView.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -10)
+			channelImageView.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+			channelImageView.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -10),
+			channelImageView.bottomAnchor.constraint(lessThanOrEqualTo: separatorView.topAnchor, constant: -16)
 		])
 		
 		NSLayoutConstraint.activate([
-			titleLabel.topAnchor.constraint(equalTo: channelImageView.topAnchor),
-			titleLabel.bottomAnchor.constraint(equalTo: subtitleLabel.topAnchor, constant: 0)
-		])
-		
-		NSLayoutConstraint.activate([
+			titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+			titleLabel.bottomAnchor.constraint(equalTo: subtitleLabel.topAnchor, constant: 0),
+			titleLabel.trailingAnchor.constraint(equalTo: subscribeButton.leadingAnchor, constant: -12),
 			subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
 			subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-			subtitleLabel.bottomAnchor.constraint(equalTo: channelImageView.bottomAnchor)
+			subtitleLabel.bottomAnchor.constraint(lessThanOrEqualTo: separatorView.topAnchor, constant: -16),
 		])
 		
+		subtitleLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 1), for: .vertical)
+		titleLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .vertical)
+		
 		NSLayoutConstraint.activate([
-			subscribeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-			subscribeButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-			
+			subscribeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+			subscribeButton.centerYAnchor.constraint(equalTo: channelImageView.centerYAnchor)
 		])
+		
+		subscribeButton.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
 		
 		NSLayoutConstraint.activate([
 			separatorView.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -123,7 +106,7 @@ class ChannelCell: BaseCell {
 			separatorView.heightAnchor.constraint(equalToConstant: 1)
 		])
 		
-		channel = Channel(name: "Taylor Swift global",
+		channel = Channel(name: "Taylor Swift global Taylor Swift global Taylor Swift global Taylor Swift global",
 						  profileImageName: "taylor_swift_profile_0",
 						  subscribers: 1_400_000)
 		

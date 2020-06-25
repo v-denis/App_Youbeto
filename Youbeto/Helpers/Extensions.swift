@@ -33,7 +33,7 @@ class CustomImageView: UIImageView, NSCacheDelegate {
 	}()
 
 	
-	func loadImageUsingUrlString(from urlString: String) {
+	func loadImageUsingUrlString(from urlString: String, completion: (() -> Void)? = nil )  {
 		
 		imageUrlString = urlString
 		
@@ -52,6 +52,8 @@ class CustomImageView: UIImageView, NSCacheDelegate {
 					if self.imageUrlString == urlString {
 						self.image = fetchedImage
 						self.imageCache.setObject(fetchedImage, forKey: NSString(string: urlString))
+						guard completion != nil else { return }
+						completion!()
 					}
 				}
 			}.resume()
@@ -62,6 +64,31 @@ class CustomImageView: UIImageView, NSCacheDelegate {
 	
 }
 
+extension Int {
+	
+	func getStringWithPostfix() -> String {
+		if self > 0 {
+			var tempNumber = Double(self)
+			var counter = 0
+			var divider = 0
+			var lastPost = ""
+			let postFix = [3:"K",6:"M",9:"B",12:"T"]
+			while tempNumber >= 10 {
+				counter += 1
+				tempNumber /= 10
+				if postFix[counter] != nil {
+					lastPost = postFix[counter]!
+					divider = Int(pow(10, Double(counter)))
+				}
+			}
+			let strViews = String(format: "%.1f", (Double(self)/Double(divider)))
+			return "\(strViews)\(lastPost)"
+		} else {
+			return "no"
+		}
+	}
+	
+}
 
 
 extension CMTime {

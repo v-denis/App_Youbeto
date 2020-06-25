@@ -31,7 +31,7 @@ class VideoPlayerView: UIView {
 		let button = UIButton(type: .system)
 		let image = UIImage(systemName: "chevron.compact.down")
 		button.translatesAutoresizingMaskIntoConstraints = false
-		button.tintColor = UIColor.white.withAlphaComponent(0.8)
+		button.tintColor = UIColor.white.withAlphaComponent(0.95)
 		button.setBackgroundImage(image, for: .normal)
 		return button
 	}()
@@ -39,7 +39,7 @@ class VideoPlayerView: UIView {
 		let button = UIButton(type: .system)
 		let image = UIImage(systemName: "pause.fill")
 		button.translatesAutoresizingMaskIntoConstraints = false
-		button.tintColor = UIColor.white.withAlphaComponent(0.9)
+		button.tintColor = UIColor.white.withAlphaComponent(0.95)
 		button.isHidden = true
 		button.setBackgroundImage(image, for: .normal)
 		return button

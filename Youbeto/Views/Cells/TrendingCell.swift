@@ -9,6 +9,8 @@
 import UIKit
 
 class TrendingCell: FeedCell {
+	
+	static let reuseId = String(describing: TrendingCell.self)
     
 	override func fetchVideos() {
 		ApiService.shared.fetchTrendingVideos { (videos) in

@@ -12,6 +12,7 @@ import UIKit
 
 class VideoCell: BaseCell {
 
+	static let reuseId = String(describing: VideoCell.self)
 	let numberFormatter = NumberFormatter()
 	
 	var video: Video? {
@@ -35,6 +36,8 @@ class VideoCell: BaseCell {
 	let thumbnailImageView: CustomImageView = {
 		let imageView = CustomImageView()
 		imageView.clipsToBounds = true
+		imageView.backgroundColor = .lightGray
+		imageView.translatesAutoresizingMaskIntoConstraints = false
 		imageView.contentMode = .scaleAspectFill
 		imageView.image = UIImage()
 		return imageView
@@ -60,7 +63,7 @@ class VideoCell: BaseCell {
 	let subtitleTextView: UITextView = {
 		let textView = UITextView()
 		textView.translatesAutoresizingMaskIntoConstraints = false
-		textView.textColor = .lightGray
+		textView.textColor = .darkGray
 		textView.isEditable = false
 		textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
 		return textView
@@ -78,6 +81,12 @@ class VideoCell: BaseCell {
 		addConstraintsFromSuperview(for: thumbnailImageView, withLeft: 16, right: -16, top: 16, bottom: nil)
 		addConstraintsFromSuperview(for: separatorView, withLeft: 0, right: 0, bottom: 0, andHeight: 1)
 		
+//		if let widthOfCell = cellWidth {
+//			NSLayoutConstraint.activate([
+//				thumbnailImageView.widthAnchor.constraint(lessThanOrEqualToConstant: widthOfCell - 32)
+//			])
+//		}
+	
 		NSLayoutConstraint.activate([
 			profileImageView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 8),
 			profileImageView.heightAnchor.constraint(equalToConstant: 44),

@@ -8,9 +8,8 @@
 
 import UIKit
 
-class CommentsCell: BaseCell {
+class CommentsCell: VideoPlayerBaseCell {
     
-	static let reuseId = String(describing: CommentsCell.self)
 	let commentsLabel: UILabel = {
 		let label = UILabel()
 		label.text = "Comments"
@@ -61,16 +60,9 @@ class CommentsCell: BaseCell {
 	}()
 	
 	override func setupLayout() {
+		super.setupLayout()
+		
 		Helper.addViewsTo(superView: self, views: [commentsLabel, numberOfCommentsLabel, bestCommentImageView, bestCommentTextLabel, unwrapCommentsButton, separatorView])
-		
-		contentView.translatesAutoresizingMaskIntoConstraints = false
-		
-		NSLayoutConstraint.activate([
-			contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-			contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			contentView.topAnchor.constraint(equalTo: topAnchor),
-			contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
-		])
 		
 		NSLayoutConstraint.activate([
 			commentsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -80,7 +72,7 @@ class CommentsCell: BaseCell {
 		])
 		
 		NSLayoutConstraint.activate([
-			numberOfCommentsLabel.centerYAnchor.constraint(equalTo: commentsLabel.centerYAnchor)
+			numberOfCommentsLabel.bottomAnchor.constraint(equalTo: commentsLabel.bottomAnchor)
 		])
 		
 		NSLayoutConstraint.activate([
@@ -98,7 +90,6 @@ class CommentsCell: BaseCell {
 		
 		NSLayoutConstraint.activate([
 			unwrapCommentsButton.centerYAnchor.constraint(equalTo: numberOfCommentsLabel.centerYAnchor),
-			unwrapCommentsButton.topAnchor.constraint(equalTo: topAnchor),
 			unwrapCommentsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
 		])
 		

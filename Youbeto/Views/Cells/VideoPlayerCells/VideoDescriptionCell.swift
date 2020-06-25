@@ -8,9 +8,8 @@
 
 import UIKit
 
-class VideoDescriptionCell: BaseCell {
+class VideoDescriptionCell: VideoPlayerBaseCell {
 	
-	static let reuseId = String(describing: VideoDescriptionCell.self)
 	let titleLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,16 +41,8 @@ class VideoDescriptionCell: BaseCell {
 		return view
 	}()
 	
-//	var cellWidth: CGFloat? {
-//		didSet {
-//			if let newCellWidth = cellWidth {
-//				contentView.widthAnchor.constraint(equalToConstant: newCellWidth).isActive = true
-//			}
-//			
-//		}
-//	}
-	
 	override func setupLayout() {
+		super.setupLayout()
 		backgroundColor = .white
 		
 		addSubview(titleLabel)
@@ -63,15 +54,6 @@ class VideoDescriptionCell: BaseCell {
 		buttonsStackView.distribution = .fillEqually
 		addSubview(buttonsStackView)
 		buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-		
-		contentView.translatesAutoresizingMaskIntoConstraints = false
-		
-		NSLayoutConstraint.activate([
-			contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-			contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			contentView.topAnchor.constraint(equalTo: topAnchor),
-			contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
-		])
 		
 		NSLayoutConstraint.activate([
 			titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
